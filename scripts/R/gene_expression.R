@@ -67,5 +67,5 @@ heat_plot <- pheatmap(log_atlas, scale = "row", # expression scaled by row
 #------------------------------
 ggsave(filename = "GeneExpression.svg", plot = heat_plot,    # Save plot as svg file
        width = 10, height = 7, dpi = 300)
-show(heat_plot)                                              # show plot
+show(heat_plot)                                              # Show plot
 ```
