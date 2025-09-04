@@ -61,7 +61,6 @@ heat_plot <- pheatmap(log_atlas, scale = "row", # expression scaled by row
          cluster_cols = FALSE,   # Not show dendogram for columns
          angle_col = 0,          # angle for column labels
          )
-
 #------------------------------
 # Save Plot
 #------------------------------
