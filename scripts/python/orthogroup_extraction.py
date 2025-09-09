@@ -1,20 +1,30 @@
+# ------------------------
+# Libraries
+# ------------------------
 import pandas as pd
 from pathlib import Path
 from Bio import SeqIO
 
+# ------------------------
+# User settings 
+# ------------------------
 proteome_dir = "proteomes"
 orthogroups_tsv = "Orthogroups.tsv"
 species_code_excel = "species_code1.xlsx"
 output_dir = "Orthogroups_FASTAS"
 
+# ------------------------
 # Protein IDs of Arabidopsis thaliana (EC biosynthetic Pathway)
+# ------------------------
 protein_ids = {
     'NP_181241.1', 'NP_176686.1', 'NP_180607.1',
     'NP_196897.1', 'NP_191072.1', 'NP_190692.1',
     'NP_196416.1', 'NP_199094.1', 'NP_194019.1', 'NP_176365.1'
 }
 
+# ------------------------
 # Load species dictionary
+# ------------------------
 def load_species(path):
     """
     Load the species code from an Excel file. 
@@ -32,7 +42,9 @@ def load_species(path):
     df = pd.read_excel(path)
     return {row[0].strip().lower(): row[1].strip() for _, row in df.iterrows()}
 
+# ------------------------
 # Load sequences and assign species
+# ------------------------
 def load_sequences(proteome_dir, species_codes):
    """
     Load the protein sequences from the proteome FASTA files. Extracts the sequence records using Biopython. 
@@ -63,7 +75,9 @@ def load_sequences(proteome_dir, species_codes):
             data[gene_id] = (record.seq, species, desc)
         return data
 
+# ------------------------
 # Find orthogroups that contain target proteins
+# ------------------------
 def get_orthogroups(tsv, targets):
    """
     Identify orthogroups that contain at least one of the target IDs from Arabidopsis thaliana.
@@ -87,7 +101,9 @@ def get_orthogroups(tsv, targets):
         if any(pid in str(cell) for cell in row[1:] if not pd.isna(cell) for pid in targets)
     }
 
+# ------------------------
 # Write matching orthogroup sequences
+# ------------------------
 def extract_orthogroups(tsv, sequences, matching_set, outdir):
   """
     Extract and saves the sequences for the matching orthogroups into FASTA files. 
@@ -124,7 +140,9 @@ def extract_orthogroups(tsv, sequences, matching_set, outdir):
                     records.append(record)
         if records:
             SeqIO.write(records, Path(outdir) / f"{og}.faa", "fasta")
-
+# ------------------------
+# Main
+# ------------------------
 if __name__ == "__main__":
     # Load species code dictionary from Excel 
     species_codes = load_species(species_code_excel)
