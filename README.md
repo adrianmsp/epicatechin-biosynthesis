@@ -17,6 +17,7 @@ This repository contains Python and R scripts for the evolutionary and functiona
 4. **Species Matrix** (´species_matrix.py´)
 - Builds a species presence-absence matrix from the orthogroups FASTA files.
 - Visualises orthogroup distribution as a heatmap/matrix.
+- Creates Clade Matrix and saves it as an excel file.
 
 ### R Scripts
 1. **Gene Expression Analysis** (´gene_expression.R´)
