@@ -13,9 +13,9 @@ from matplotlib.patches import Patch
 # ------------------------
 # User settings 
 # ------------------------
-fasta_directory = "Orthogroups_BLASTP"
-species_code = "species_code2.xlsx"
-enzyme_file = "enzyme_names.xlsx"
+fasta_directory = "Orthogroups_BLASTP"  # FASTA files folder, change if needed
+species_code = "species_code2.xlsx"     # Species Code excel
+enzyme_file = "enzyme_names.xlsx"       # Enzyme file with Pathway order
 
 
 # Specific clade order 
