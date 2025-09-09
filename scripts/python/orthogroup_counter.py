@@ -1,3 +1,6 @@
+# ------------------------
+# Libraries
+# ------------------------
 from Bio import SeqIO
 import os
 import pandas as pd
@@ -5,7 +8,9 @@ import matplotlib.pyplot as plt
 import numpy as np
 import matplotlib.patches as mpatches
 
+# ------------------------
 # Count sequences per FASTA files
+# ------------------------
 def count_sequences(folder_path):
     """
     Count Sequences per .faa FASTA file of the folder path.
@@ -30,8 +35,9 @@ def count_sequences(folder_path):
                 "SequenceCount": seq_count
             })
     return counts
-
+# ------------------------
 # DataFrame with renaming and ordering
+# ------------------------
 def custom(counts, rename, order):
     """
     DataFrame, with renaiming and plotting order.
@@ -61,8 +67,9 @@ def custom(counts, rename, order):
     df.reset_index(drop=True, inplace=True)
     df["Orthogroup_label"] = df["Orthogroup"].str.replace("(","\n(", regex= False)
     return df
-
+# ------------------------
 # Bar Chart
+# ------------------------
 def plot_counter(df, output_file= "orthogroups_counts.png"):
     """
     Cretes and saves the bar chart as a png of the sequence counts
@@ -121,8 +128,9 @@ def plot_counter(df, output_file= "orthogroups_counts.png"):
     #Save png and show
     plt.savefig(output_file, dpi=300)
     plt.show()
-
+# ------------------------
 # Main
+# ------------------------
 def main():
     """
     Main Workflow: count sequences, prepares DataFrame  and plots
@@ -154,10 +162,12 @@ def main():
     ]
 
     # Run main
-    counts = count_sequences(folder_path)
-    df = custom(counts, rename, order)
-    plot_counter(df, output_file="orthogroups_counts.png")
-
+    counts = count_sequences(folder_path) # Add Folder Path
+    df = custom(counts, rename, order)    # Creates df
+    plot_counter(df, output_file="orthogroups_counts.png")  # Plots counter bar plot
+    
+# ------------------------
 # Run script
+# ------------------------
 if __name__ == "__main__":
     main()
